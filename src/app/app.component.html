@@ -1,0 +1,27 @@
+<hello name=""></hello>
+
+<div class="container-roles">
+  <p><strong>Current Role:</strong><pre>{{ userRole$ | async}}</pre><p>
+  
+  <div class="buttons">
+    <button type="button" (click)="changeRole('USER')">Role USER</button>
+    <button type="button" (click)="changeRole('ADMIN')">Role ADMIN</button>
+  </div>
+</div>
+
+<ng-container *ngFor="let student of students; let i = index">
+  <div class="container">
+    <div class="info">
+      <p><strong>Name:</strong> {{ student.name }}</p>
+      <p><strong>Course:</strong> {{ student.course }}</p>
+    </div>
+    <div class="buttons">
+      <button type="button" (click)="onView(i)">View</button>
+      <button *appHasPermission type="button" (click)="onEdit(i)">Edit</button>
+    </div>
+  </div>
+  <div class="container">
+    <pre>{{ messages[i] ? messages[i] : 'No message' }}</pre>
+    <button *ngIf="messages[i].length > 0" button="button" (click)="resetMessage(i)">Reset</button>
+  </div>
+</ng-container>
